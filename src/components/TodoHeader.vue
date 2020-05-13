@@ -1,5 +1,5 @@
 <template>
-  <h1>할일관리</h1>
+  <h1>할일관리 v0.1</h1>
 </template>
 
 <script>
