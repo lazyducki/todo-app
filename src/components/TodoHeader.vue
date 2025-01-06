@@ -1,9 +1,13 @@
 <template>
-  <h1>할일관리 v0.1</h1>
+  <h1>할 일 관리</h1>
 </template>
 
 <script>
-export default {};
+export default {
+
+}
 </script>
 
-<style></style>
+<style>
+
+</style>

@@ -1,60 +1,63 @@
 <template>
-  <div>
-    <!-- <p>{{ msg }}</p>
-    <main v-if="show">메인</main> -->
+  <div id="app">
+    <!-- {{ msg }} -->
     <todo-header></todo-header>
     <todo-input v-on:addItem="addItem"></todo-input>
-    <todo-list v-bind:todos="todoItems" v-on:remove="removeItem"></todo-list>
-    <todo-footer v-on:clear="claerList"></todo-footer>
+    <todo-list v-bind:todos="todoItems" v-on:removeItem="removeItem"></todo-list>
+    <todo-footer v-on:clear="clearItems"></todo-footer>
   </div>
 </template>
 
 <script>
+import TodoFooter from './components/TodoFooter.vue';
 import TodoHeader from './components/TodoHeader.vue';
 import TodoInput from './components/TodoInput.vue';
 import TodoList from './components/TodoList.vue';
-import TodoFooter from './components/TodoFooter.vue';
 
 export default {
   components: {
-    'todo-header': TodoHeader,
-    'todo-input': TodoInput,
-    'todo-list': TodoList,
-    'todo-footer': TodoFooter,
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter
   },
   data() {
-    //vda
     return {
-      todoItems: [],
-    };
+      todoItems: []
+    }
   },
   methods: {
-    fetchTodoItems: function() {
-      //var arr = [];
-      //this.todoItems = [];
-      for (var i = 0; i < localStorage.length; i++) {
+    fetchTodoItems() {
+      // var arr = [];
+      for(var i = 0; i < localStorage.length; i++){
         var value = localStorage.key(i);
+        // arr.push(value);
         this.todoItems.push(value);
       }
-      //return arr;
+      // return arr;
     },
-    claerList: function() {
-      localStorage.clear();
+    clearItems(){
       this.todoItems = [];
+      localStorage.clear();
     },
-    addItem: function(todoItem) {
-      this.todoItems.push(todoItem);
-      localStorage.setItem(todoItem, todoItem);
+    addItem(item){
+      this.todoItems.push(item)
+      localStorage.setItem(item, item);
     },
-    removeItem: function(todoItem, index) {
-      this.todoItems.splive(index, 1);
-      localStorage.removeItem(todoItem, index);
-    },
+    removeItem(item, index){
+      console.log(item, index);
+      //배열변경
+      this.todoItems.splice(index ,1);
+      //저장소 변경
+      localStorage.removeItem(item);
+    }
   },
-  created: function() {
+  created () {
     this.fetchTodoItems();
   },
-};
+}
 </script>
 
-<style></style>
+<style>
+
+</style>
